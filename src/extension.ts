@@ -15,6 +15,20 @@ export function activate(context: vscode.ExtensionContext) {
         folderPath = path.dirname(uri.fsPath);
       }
 
+      // React 컴포넌트 템플릿 생성 함수
+      function generateComponentTemplate(folderName: string) {
+        return `import React from 'react';
+
+type Props = {};
+
+const ${folderName} = (props: Props) => {
+  return <div>${folderName}</div>;
+};
+
+export default ${folderName};
+`;
+      }
+
       // 사용자로부터 폴더 이름을 입력 받음
       vscode.window
         .showInputBox({ prompt: "Enter the folder name" })
@@ -27,8 +41,14 @@ export function activate(context: vscode.ExtensionContext) {
               fs.mkdirSync(newFolderPath);
             }
 
-            // index.tsx 및 styles.ts 파일 생성
-            fs.writeFileSync(path.join(newFolderPath, "index.tsx"), "");
+            // index.tsx 파일에 React 컴포넌트 코드 작성
+            const componentTemplate = generateComponentTemplate(folderName);
+            fs.writeFileSync(
+              path.join(newFolderPath, "index.tsx"),
+              componentTemplate
+            );
+
+            // styles.ts 파일 생성
             fs.writeFileSync(path.join(newFolderPath, "styles.ts"), "");
 
             vscode.window.showInformationMessage(
