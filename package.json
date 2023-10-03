@@ -16,8 +16,20 @@
       {
         "command": "dryfs.helloWorld",
         "title": "Hello World"
+      },
+      {
+        "command": "dryfs.makeMyFolder",
+        "title": "Make My Folder"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "dryfs.makeMyFolder",
+          "when": "explorerViewletVisible"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
