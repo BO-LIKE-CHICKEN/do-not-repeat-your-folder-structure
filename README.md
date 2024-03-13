@@ -25,6 +25,6 @@ No known issues at the moment.
 ### 0.0.1
 
 Introduced the Make My Folder feature.
-Automatically creates index.tsx and styles.ts files.
+Automatically creates `Component.tsx`, `Component.test.tsx`, `styles.ts` and `index.ts` files.
 
 **Enjoy!**
