@@ -25,6 +25,13 @@ No known issues at the moment.
 ### 0.0.1
 
 Introduced the Make My Folder feature.
-Automatically creates `Component.tsx`, `Component.test.tsx`, `styles.ts` and `index.ts` files.
+
+```bash
+  │── Foo
+  │   ├── Foo.test.tsx
+  │   ├── Foo.tsx
+  │   ├── index.ts
+  │   └── styles.ts
+```
 
 **Enjoy!**
