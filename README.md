@@ -4,16 +4,16 @@ Introduced the Make My Folder feature.
 
 # Features
 
-Make My Folder: Prompt the user for a folder name, then create that folder. Within that folder, the extension also creates `Component.tsx`, `Component.test.tsx`, `styles.ts` and `index.ts` files.
-
-The `Component.tsx` file is automatically populated with React component code based on the given folder name.
+- Create a new folder with a predefined set of files including React component, test, styles, and index files.
+- Customize the generated folder structure through the VS Code settings.
+- Quick and easy generation of folder structures with a single command.
 
 ```bash
   │── Foo
   │   ├── Foo.test.tsx
   │   ├── Foo.tsx
   │   ├── index.ts
-  │   └── styles.ts
+  │   └── ${styles.ts}
 
 ```
 
@@ -23,7 +23,21 @@ The `Component.tsx` file is automatically populated with React component code ba
 
 # Extension Settings
 
-There are currently no additional settings options for this extension.
+This extension contributes the following settings:
+
+- `dryfs.stylesFilename`: set the filename for the styles file (default `styles.ts`).
+- `dryfs.includeReactImport`: include the React import statement in component templates (default `false`).
+
+```json
+{
+  "dryfs.stylesFilename": "styles.css.ts",
+  "dryfs.includeReactImport": true
+}
+```
+
+# Contributing
+
+If you'd like to contribute to the development of DRYFS, please create a pull request or raise an issue on the repository.
 
 # Known Issues
 
@@ -50,6 +64,10 @@ To install the downloaded `.vsix` file:
 4. Select "Install from VSIX..."
 5. Choose the downloaded `dryfs-0.0.1.vsix` file.
 
-**Enjoy the simplicity and efficiency of creating new components with `dryfs`!**
+# License
 
-**Enjoy!**
+This extension is [MIT licensed](LICENSE).
+
+---
+
+**Enjoy the simplicity and efficiency of creating new components with `dryfs`!**
