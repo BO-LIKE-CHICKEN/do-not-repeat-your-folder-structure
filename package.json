@@ -1,8 +1,14 @@
 {
   "name": "dryfs",
+  "publisher": "dryfs",
   "displayName": "Dont Repeat Your Folder Structure",
   "description": "Automatically create folder structures adhering to the DRY principle. Avoid the repetition of defining folder structures manually",
   "version": "1.0.0",
+  "icon": "images/dryfs_logo.webp",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BO-LIKE-CHICKEN/do-not-repeat-your-folder-structure"
+  },
   "engines": {
     "vscode": "^1.82.0"
   },
