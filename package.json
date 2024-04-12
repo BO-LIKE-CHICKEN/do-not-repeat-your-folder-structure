@@ -2,7 +2,7 @@
   "name": "dryfs",
   "displayName": "Dont Repeat Your Folder Structure",
   "description": "Automatically create folder structures adhering to the DRY principle. Avoid the repetition of defining folder structures manually",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "engines": {
     "vscode": "^1.82.0"
   },
