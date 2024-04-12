@@ -1,7 +1,18 @@
-export function generateComponentTemplate(folderName: string) {
+export function generateImportReactComponentTemplate(folderName: string) {
   return `import React from "react";
 
 type Props = {};
+
+const ${folderName} = (props: Props) => {
+  return <div>${folderName}</div>;
+};
+
+export default ${folderName};
+`;
+}
+
+export function generateComponentTemplate(folderName: string) {
+  return `type Props = {};
 
 const ${folderName} = (props: Props) => {
   return <div>${folderName}</div>;

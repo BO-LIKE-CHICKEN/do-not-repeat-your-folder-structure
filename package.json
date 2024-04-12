@@ -38,6 +38,11 @@
           "type": "string",
           "default": "styles.ts",
           "description": "Filename for the styles file"
+        },
+        "dryfs.includeReactImport": {
+          "type": "boolean",
+          "default": false,
+          "description": "Include React import statement in component templates"
         }
       }
     }

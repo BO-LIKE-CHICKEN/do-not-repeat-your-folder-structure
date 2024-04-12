@@ -1,7 +1,11 @@
 import * as vscode from "vscode";
 import * as fs from "fs";
 import * as path from "path";
-import { generateComponentTemplate, generateIndexTemplate } from "./template";
+import {
+  generateComponentTemplate,
+  generateImportReactComponentTemplate,
+  generateIndexTemplate,
+} from "./template";
 
 export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand(
@@ -12,12 +16,16 @@ export function activate(context: vscode.ExtensionContext) {
         : path.dirname(uri.fsPath);
 
       const config = vscode.workspace.getConfiguration("dryfs");
+
       const stylesFilename =
-        config.get<string>("stylesFilename") || "styles.ts";
+        config.get<string>("stylesFilename") ?? "styles.ts";
+
+      const isIncludeReactImport = config.get<boolean>("includeReactImport");
 
       const folderName = await vscode.window.showInputBox({
         prompt: "Enter the folder name",
       });
+
       if (!folderName) {
         return;
       }
@@ -27,17 +35,19 @@ export function activate(context: vscode.ExtensionContext) {
         fs.mkdirSync(newFolderPath);
       }
 
-      const componentTemplate = generateComponentTemplate(folderName);
+      const componentTemplate = isIncludeReactImport
+        ? generateImportReactComponentTemplate(folderName)
+        : generateComponentTemplate(folderName);
+
       fs.writeFileSync(
         path.join(newFolderPath, `${folderName}.tsx`),
         componentTemplate
       );
 
       const indexTemplate = generateIndexTemplate(folderName);
+
       fs.writeFileSync(path.join(newFolderPath, "index.ts"), indexTemplate);
-
-      fs.writeFileSync(path.join(newFolderPath, stylesFilename), ""); // Use the configured filename
-
+      fs.writeFileSync(path.join(newFolderPath, stylesFilename), "");
       fs.writeFileSync(path.join(newFolderPath, `${folderName}.test.tsx`), "");
 
       vscode.window.showInformationMessage(
