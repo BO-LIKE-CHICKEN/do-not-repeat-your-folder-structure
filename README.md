@@ -75,6 +75,10 @@ No known issues at the moment.
 
 Introduced the "Make My Folder" feature, which allows users to quickly generate a folder structure for their project.
 
+## 1.0.1
+
+Added detailed usage instructions to the README.md to enhance user understanding and ease of use.
+
 # License
 
 This extension is [MIT licensed](LICENSE).
