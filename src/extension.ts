@@ -11,17 +11,6 @@ export function activate(context: vscode.ExtensionContext) {
   const disposable = vscode.commands.registerCommand(
     "dryfs.makeMyFolder",
     async (uri: vscode.Uri) => {
-      const folderPath = fs.lstatSync(uri.fsPath).isDirectory()
-        ? uri.fsPath
-        : path.dirname(uri.fsPath);
-
-      const config = vscode.workspace.getConfiguration("dryfs");
-
-      const stylesFilename =
-        config.get<string>("stylesFilename") ?? "styles.ts";
-
-      const isIncludeReactImport = config.get<boolean>("includeReactImport");
-
       const folderName = await vscode.window.showInputBox({
         prompt: "Enter the folder name",
       });
@@ -29,6 +18,17 @@ export function activate(context: vscode.ExtensionContext) {
       if (!folderName) {
         return;
       }
+
+      const folderPath = fs.lstatSync(uri.fsPath).isDirectory()
+        ? uri.fsPath
+        : path.dirname(uri.fsPath);
+
+      const config = vscode.workspace.getConfiguration("dryfs");
+
+      const isIncludeReactImport = config.get<boolean>("includeReactImport");
+
+      const stylesFilename =
+        config.get<string>("stylesFilename") ?? "styles.ts";
 
       const newFolderPath = path.join(folderPath, folderName);
       if (!fs.existsSync(newFolderPath)) {
@@ -39,13 +39,12 @@ export function activate(context: vscode.ExtensionContext) {
         ? generateImportReactComponentTemplate(folderName)
         : generateComponentTemplate(folderName);
 
+      const indexTemplate = generateIndexTemplate(folderName);
+
       fs.writeFileSync(
         path.join(newFolderPath, `${folderName}.tsx`),
         componentTemplate
       );
-
-      const indexTemplate = generateIndexTemplate(folderName);
-
       fs.writeFileSync(path.join(newFolderPath, "index.ts"), indexTemplate);
       fs.writeFileSync(path.join(newFolderPath, stylesFilename), "");
       fs.writeFileSync(path.join(newFolderPath, `${folderName}.test.tsx`), "");
