@@ -20,10 +20,6 @@
   "contributes": {
     "commands": [
       {
-        "command": "dryfs.helloWorld",
-        "title": "Hello World"
-      },
-      {
         "command": "dryfs.makeMyFolder",
         "title": "Make My Folder"
       }
