@@ -152,13 +152,10 @@ async function createFoldersAndFiles(
   async function processFiles(base: string, files: any[], moduleName: string) {
     for (const file of files) {
       const fileName = file.name.replace("{moduleName}", moduleName);
-      if (file.content) {
-        const content = file.content.replace(/{moduleName}/g, moduleName);
-        await createFile(base, fileName, content);
-        return;
-      }
-
-      console.warn(`Skipping file ${fileName} due to missing content.`);
+      const content = file.content
+        ? file.content.replace(/{moduleName}/g, moduleName)
+        : "";
+      await createFile(base, fileName, content);
     }
   }
 
@@ -172,10 +169,6 @@ async function createFile(
   fileName: string,
   content: string
 ) {
-  if (!content) {
-    throw new Error("Content must be provided");
-  }
-
   const filePath = path.join(folderPath, fileName);
 
   try {
