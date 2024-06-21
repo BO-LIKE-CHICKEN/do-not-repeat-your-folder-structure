@@ -32,14 +32,11 @@ export function activate(context: vscode.ExtensionContext) {
         // Getting the folder path from the URI.
         const folderPath = await getFolderPath(uri);
 
-        // Setting the path for the new folder.
-        const newFolderPath = path.join(folderPath, moduleName);
-
         // Creating the new folder if it doesn't exist.
-        await createFolderIfNotExists(newFolderPath);
+        await createFolderIfNotExists(folderPath);
 
         // Creating folders and files based on the configuration.
-        await createFoldersAndFiles(newFolderPath, config, moduleName);
+        await createFoldersAndFiles(folderPath, config, moduleName);
 
         vscode.window.showInformationMessage(
           "Folder and files created successfully!"
