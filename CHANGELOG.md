@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Nothing yet.
 
-## [2.0.0] - 2024-06-21
+## [2.0.0] - 2024-06-24
 
 ### Breaking Changes
 

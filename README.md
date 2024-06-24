@@ -1,65 +1,78 @@
-# Intro
+## Intro
 
-Introduced the Make My Folder feature.
+Introducing an extension that saves you time in creating folders.
 
-# Features
+## Features
 
-- Create a new folder with a predefined set of files including React component, test, styles, and index files.
-- Customize the generated folder structure through the VS Code settings.
-- Quick and easy generation of folder structures with a single command.
+- With just one click and a single input, you can effortlessly create complex, repetitive folder structures.
+- You can customize and save folder structures, folder names, file names, and even the content within files through the configuration file.
 
-# Usage
+## Usage
 
 To use the `Make My Folder` feature in your VS Code environment, follow these simple steps:
 
-## 1. **Right-click** on the folder in the VS Code Explorer where you want to create your new component structure.
+### 1. **Configure Settings**
 
-![usage_1](/images/usage_1.png)
-
-## 2. Select **`Make My Folder`** from the context menu.
-
-## 3. You will be prompted to enter the **name of your new folder**. Type the desired name and press **Enter**.
-
-![usage_2](/images/usage_2.png)
-
-## 4. The extension will automatically generate a new folder with the specified name and the predefined set of files:
-
-![usage_3](/images/usage_3.png)
-
-- `${FolderName}.tsx` for your React component
-- `${FolderName}.test.tsx` for your component's test
-- `index.ts` for easy exports
-- `${styles.ts}` for component styling, which can be renamed based on your settings
-
-The file and folder names will be automatically replaced with the name you provide, and the files will be customized according to the extension settings you've configured.
-
-For example, if you input "Bar" as the folder name, here is what will be created:
-
-```bash
-│── Bar
-│   ├── Bar.test.tsx
-│   ├── Bar.tsx
-│   ├── index.ts
-│   └── styles.ts  # or whatever filename is configured in the settings
-```
-
-# Requirements
-
-- This extension requires Visual Studio Code version 1.82.0 or above.
-
-# Extension Settings
-
-This extension contributes the following settings:
-
-- `dryfs.stylesFilename`: set the filename for the styles file (default `styles.ts`).
-- `dryfs.includeReactImport`: include the React import statement in component templates (default `false`).
+First, configure the folder and file structure in your `.vscode/settings.json` file. Here is an example configuration:
 
 ```json
 {
-  "dryfs.stylesFilename": "styles.css.ts",
-  "dryfs.includeReactImport": true
+  "dryfs.rootFolder": {
+    "folders": [
+      {
+        "name": "{moduleName}",
+        "folders": [
+          {
+            "name": "components",
+            "files": [
+              {
+                "name": "{moduleName}.tsx"
+              }
+            ]
+          },
+          {
+            "name": "styles",
+            "files": [
+              {
+                "name": "{moduleName}.module.css"
+              }
+            ]
+          }
+        ],
+        "files": [
+          {
+            "name": "index.ts",
+            "content": "export { default } from './{moduleName}';"
+          },
+          {
+            "name": "types.ts"
+          }
+        ]
+      }
+    ],
+    "files": []
+  }
 }
 ```
+
+### 2. **Right-click** on the folder in the VS Code Explorer where you want to create your new component structure and select **Make My Folder** from the context menu.
+
+<!-- ![usage_1](/images/usage_1.png) -->
+
+<img src="/images/usage_1.png" alt="usage_1" width="600" />
+
+### 4. You will be prompted to enter the **name of your new folder**. Type the desired name and press **Enter**.
+
+<!-- ![usage_2](/images/usage_2.png) -->
+<img src="/images/usage_2.png" alt="usage_2" width="600" />
+
+### 5. The extension will automatically generate a new folder with the specified name and the predefined set of files:
+
+<img src="/images/usage_3.png" alt="usage_3" width="600" />
+
+# Requirement
+
+- This extension requires Visual Studio Code version 1.82.0 or above.
 
 # Contributing
 
@@ -82,6 +95,17 @@ Added detailed usage instructions to the README.md to enhance user understanding
 # License
 
 This extension is [MIT licensed](LICENSE).
+
+## [2.0.0]
+
+### Breaking Changes
+
+- Changed the file system operations from asynchronous to synchronous to simplify the code structure.
+- Moved configuration to VS Code settings to avoid project root clutter.
+- Enhanced error handling with detailed messages.
+- Ensured folder creation is recursive.
+- Added validation for configuration structure.
+- Ensured file creation only if content is provided, and skipped file creation if content is missing.
 
 ---
 
